@@ -11,12 +11,13 @@ public class Main {
         ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
         StudentService studentService = context.getBean(StudentService.class);
 
-        Student student1 = new Student(1, "imene legsir");
-        Student student2 = new Student(2, "mohamed legsir");
-
+        Student student1 = new Student(4, "Bob Brown", "bob@example.com", 2);
         studentService.createStudent(student1);
-        studentService.createStudent(student2);
 
+        Student retrievedStudent = studentService.findById(1);
+        System.out.println("Retrieved Student: " + retrievedStudent);
+
+        System.out.println("All Students:");
         studentService.displayAllStudents();
     }
 }

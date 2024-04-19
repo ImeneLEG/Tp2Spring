@@ -3,9 +3,11 @@ package org.example.student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StudentServiceImpl implements StudentService {
-    private final StudentRepository studentRepository;
+    private StudentRepository studentRepository;
 
     @Autowired
     public StudentServiceImpl(StudentRepository studentRepository) {
@@ -18,15 +20,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student findStudentById(int id) {
-        return studentRepository.findById(id);
+    public Student findById(int id) {
+        return studentRepository.findById(id).orElse(null);
     }
 
     @Override
-    public void displayAllStudents() {
-        System.out.println("All students:");
-        for (Student student : studentRepository.findAll()) {
-            System.out.println(student.getName());
-        }
+    public List<Student> displayAllStudents() {
+        return studentRepository.findAll();
     }
 }

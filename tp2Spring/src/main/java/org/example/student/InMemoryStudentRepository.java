@@ -1,29 +1,25 @@
 package org.example.student;
 
-import org.springframework.stereotype.Repository;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
-@Repository
 public class InMemoryStudentRepository implements StudentRepository {
-    private Map<Integer, Student> students = new HashMap<>();
+    private List<Student> students = new ArrayList<>();
 
     @Override
-    public void save(Student student) {
-        students.put(student.getId(), student);
+    public Student save(Student student) {
+        students.add(student);
+        return student;
     }
 
     @Override
-    public Student findById(int id) {
-        return students.get(id);
+    public Optional<Student> findById(int id) {
+        return students.stream().filter(s -> s.getId() == id).findFirst();
     }
 
     @Override
     public List<Student> findAll() {
-        return new ArrayList<>(students.values());
+        return new ArrayList<>(students);
     }
 }
-

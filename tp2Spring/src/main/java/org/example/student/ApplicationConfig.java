@@ -11,11 +11,6 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public StudentService studentServiceMock() {
-        return new StudentServiceMock();
-    }
-
-    @Bean
     public StudentRepository studentRepository() {
         return new InMemoryStudentRepository();
     }
